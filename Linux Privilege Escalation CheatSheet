@@ -1,0 +1,112 @@
+### Various capabilities
+which gcc
+which cc
+which python
+which perl
+which wget
+which curl
+which fetch
+which nc
+which ncat
+which nc.traditional
+which socat
+
+### Compilation check (Use it as Last Resort)
+file /bin/bash
+uname -a
+cat /etc/*-release
+cat /etc/issue
+
+### System Architecture
+file /bin/bash
+
+### Which kernel
+uname -a
+
+### Are we a real user?
+sudo -l
+ls -lsaht /etc/sudoers
+
+### Check out your shells enviroment variables
+env
+https://www.hackingarticles.in/linux-privilege-escalation-using-path-variable/
+
+### Users
+cd /home
+ls -lsaht
+
+### Web configs containing credentials
+cd /var/www/html/
+ls -lsaht
+
+### SUIDs binaries
+find / -perm -u=s -type f 2>/dev/null
+
+### GUIDs binaries
+find / -perm -g=s -type f 2>/dev/null
+
+### SUID/GUID/SUDO Escalation
+https://gtfobins.github.io/
+
+### We need to start monitoring the system if possible while performing our enumeration
+https://github.com/DominicBreuker/pspy/blob/master/README.md
+cd /var/tmp/
+File Transfer --> pspy32
+File Transfer --> pspy64
+chmod 755 pspy32 pspy64
+./pspy<32/64>
+
+### Local network
+netstat -antup
+netstat -tunlp
+
+### Anything vulnerable running as root?
+ps aux |grep -i 'root' --color=auto
+
+### MySQL credentials, running unauthorized access
+mysql -uroot -p
+Enter Password:
+root : root
+root : toor
+root :
+
+### We would take a quick look at etc to see if any user-level people did special things
+cd /etc/
+ls -lsaht
+Anything other than root here?
+• Any config files left behind?
+→ ls -lsaht |grep -i ‘.conf’ --color=auto
+• If we have root priv information disclosure - are there any .secret in /etc/ files?
+→ ls -lsaht |grep -i ‘.secret’ --color=aut
+
+### SSH Keys 
+ls -lsaR /home/
+
+### Quick look in:
+ls -lsaht /var/lib/
+ls -lsaht /var/db
+ls -lsaht /opt/
+ls -lsaht /tmp/
+ls -lsaht /var/tmp/
+ls -lsaht /dev/shm/
+
+### Checking for File transfer capabilities
+which wget
+which curl
+which nc
+which fetch (BSD)
+ls -lsaht /bin/ |grep -i 'ftp' --color=auto
+
+### CRON tab 
+crontab –u root –l
+cat /etc/crontab
+ls /etc/cron.*
+
+### <User> is a user on this machine. What is every single file he has ever created?
+find / -user miguel 2>/dev/null
+
+### Mail directory
+cd /var/mail/
+ls -lsaht
+
+### 
