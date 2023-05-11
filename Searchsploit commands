@@ -1,0 +1,17 @@
+### searchsploit command to search for the following terms: php, webdav, windows
+searchsploit php webdav windows
+
+###  searchsploit, find the EDB-ID of the exploit with the title of "Arm Whois 3.11 - Buffer Overflow (SEH)"
+searchsploit -t "Arm Whois 3.11 - Buffer Overflow (SEH)"
+
+### Copy exploit to current working directory using EBD-ID number
+searchsploit -m 45796
+
+### Find Eternal Blue exploit for Windows 2012 x64 
+searchsploit -t "Eternal Blue" Windows 2012 x64
+
+### Search the privilege escalation exploit against Linux Kernel 2.6.22 using SUID
+searchsploit -s -t "privilege escalation" Linux Kernel 2.6.22 SUID
+
+### Search the Remote Keylogger Bind Shellcode generator for Windows x64
+searchsploit Remote Keylogger Bind Shellcode generator Windows x64 
