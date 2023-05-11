@@ -1,0 +1,6 @@
+### Getting list of NSE scripts containing exploits
+grep Exploits /usr/share/nmap/scripts/*.nse
+
+### Display information about specific NSE script
+nmap --script-help=clamav-exec.nse
+
