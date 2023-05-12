@@ -1,0 +1,18 @@
+### List Shares
+smbmap -H [ip/hostname]
+echo exit | smbclient -L \\\\[ip]
+nmap --script smb-enum-shares -p 139,445 [ip]
+
+### Check for vulnerabilities
+nmap --script smb-vuln* -p 139,445 [ip]
+
+### Overall scan
+enum4linux -a [ip]
+
+### To see which shares are available on the host
+smbclient -L host
+
+### To access a share
+smbclient \\\\hostip\\sharename mypasswd
+
+
