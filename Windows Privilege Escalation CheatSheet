@@ -1,0 +1,44 @@
+### Whoami
+whoami
+
+### CAN I DO SPECIAL THINGS?
+WHOAMI /PRIV
+
+### Services
+wmic service get name,startname
+NET START
+
+### Network Capability
+netstat -anoy
+
+### Net Users (Lateral movement capabilities)
+net users
+net LOCALGROUP
+net USER <USERNAME> (AM I ADMIN? ANY SPECIAL GROUPS?)
+
+### Admin Capability
+Net local group administrators
+
+### Permitted traffic capability
+netsh advfirewall firewall show rule name=all
+netsh advfirewall firewall show rule name=inbound
+netsh advfirewall firewall show rule name=outbounD
+
+### File trasnfer capability
+CERTUTIL?
+FTP?
+TFTP?
+VB?
+PS?
+SMB?
+NFS?
+
+### Any scheduled tasks/ IO operations
+C:\ > schtasks /query /fo LIST /v > schtasks.txt
+
+### Binpath
+SC.EXE
+
++ Pro-tip - To prevent your shell from hanging as a result of any of these commands, prefix them with this!
+cmd.exe /c <commands>
+cmd.exe /c start <commands>
