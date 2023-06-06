@@ -1,0 +1,19 @@
+### Port forwarding
+socat TCP-LISTEN:<tcp_port>,fork TCP:<target_ip>
+
+### SSH Local port forwarding
+ssh -N -L 0.0.0.0:<tcp_port><target_machine_ip><target_machine_port> <accessible_machine_ssh_user>@<accessible_machine_ip>
+
+### SSH Dynamic port forwarding
+ssh -N -D 0.0.0.0:<tcp_port> <accessible_machine_ssh_user>@<accessible_machine_ip>
+##### Require to setup proxychains /etc/proxychains4.conf
+
+### SSH Remote port forwarding
+ssh -N -R 127.0.0.1:<tcp_port>:<target_machine_ip><target_machine_port> <kali_machine_ssh_user>@<kali_machine_ip>
+
+### SSH Remote dynamic port forwarding
+ssh -N -R <tcp_port> <kali_machine_ssh_user>@<kali_machine_ip>
+##### Require to setup proxychains /etc/proxychains4.conf
+
+### SSHuttle
+sshuttle -r <accessible_machine_ssh_user>@<accessible_machine_ip>:<tcp_port> <10.4.50.0/24> <172.16.50.0/24>
