@@ -118,4 +118,6 @@ find / -user miguel 2>/dev/null
 cd /var/mail/
 ls -lsaht
 
-### 
+### If docker images are available
+docker images
+docker run -v /:/mnt --rm -it <image> chroot /mnt sh
