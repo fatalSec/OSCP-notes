@@ -32,6 +32,11 @@ msf > use auxiliary/server/ftp
 msf > set FTPROOT /tmp/ftproot
 msf > run
 
+##### Autorouting
+msf > use multi/manage/autoroute
+msf > set session 1 //Use only if works with sessions
+msf > run
+
 ##### Proxy Server
 msf > use auxiliary/server/socks4
 msf > run 
