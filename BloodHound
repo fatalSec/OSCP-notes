@@ -1,0 +1,27 @@
+### Start neo4j server
+sudo neo4j start
+
+### Launch BloodHound
+bloodhound
+
+### Raw queries
+# To get list of computers in the network
+MATCH (m:Computer) RETURN m
+
+# Display all user accounts on the domain'
+MATCH (m:User) RETURN m
+
+# Display all domain administrators
+Use prebuilt query "Find all Domain Admins" query under the Analysis tab
+
+### Useful prebuilt queries to be run in order to find potential vectors to elevate our privileges
+- Find Workstations where Domain Users can RDP
+- Find Servers where Domain Users can RDP
+- Find Computers where Domain Users are Local Admin
+- Shortest Path to Domain Admins from Owned Principals
+
+# Reviewing active sessions
+MATCH p = (c:Computer)-[:HasSession]->(m:User) RETURN p
+
+# Identify all kerberoastable users in the domain
+Use prebuilt query "List all Kerberoastable Accounts"
