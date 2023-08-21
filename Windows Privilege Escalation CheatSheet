@@ -19,6 +19,9 @@ net USER <USERNAME> (AM I ADMIN? ANY SPECIAL GROUPS?)
 ### Admin Capability
 Net local group administrators
 
+### Add user to another group
+net localgroup administrators web_svc /add
+
 ### Permitted traffic capability
 netsh advfirewall firewall show rule name=all
 netsh advfirewall firewall show rule name=inbound
